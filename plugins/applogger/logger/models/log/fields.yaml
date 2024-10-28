@@ -1,0 +1,24 @@
+# # ===================================
+# #  Form Field Definitions
+# # ===================================
+
+fields:
+    name:
+        label: Name of a Student
+        type: text
+        span: left
+        required: true
+
+    time_of_arrival:
+        label: Time of Arrival
+        type: datepicker
+        mode: datetime
+        format: Y-m-d H:i:s
+        span: full
+        required: true
+
+    is_late:
+        label: is late?
+        type: switch
+        default: false
+        span: full

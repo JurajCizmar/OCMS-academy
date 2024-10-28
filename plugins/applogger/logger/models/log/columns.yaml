@@ -1,0 +1,20 @@
+# # ===================================
+# #  List Column Definitions
+# # ===================================
+
+columns:
+    id:
+        label: ID
+
+    name:
+        label: Student Name
+        type: text
+
+    time_of_arrival:
+        label: Time of Arrival
+        type: datetime
+        format: d-m-Y H:i
+
+    is_late:
+        label: Is Late?
+        type: switch
