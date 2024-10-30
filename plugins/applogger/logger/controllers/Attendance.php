@@ -46,7 +46,7 @@ class Attendance extends Controller
     public function getAllLogs()
     {
         $logs = Log::all();
-        return response()->json(['data' => $logs]);
+        return response()->json(['data' => $logs]); // REVIEW - Tip - toto sa dá zjednodušiť na "return ['data' => $logs];", keď vrátiš array tak OCMS automaticky zaregistruje že je to json response
     }
 
     public function createAttendance($name)
@@ -64,6 +64,8 @@ class Attendance extends Controller
 
     public function getStudent($name)
     {
+        // REVIEW - tu funkcia hľadá iba jedného študenta, ale používaš "get()", čo je zoznam. Viac by sa hodilo "first()"
+        // REVIEW - taktiež tu nie je pokrytý prípad, kedy študent s menom "$name" neexistuje. Odporúčam "firstOrFail()"
         $data = Log::where('name', $name)->get();
 
         return response()->json(['data' => $data]);
@@ -71,6 +73,7 @@ class Attendance extends Controller
 
     public function deleteLogs()
     {
+        // REIVEW - Tip - Tu by sa to určite dalo urobiť bez foreach loopu, napr. "Log::query()->delete()" by mohlo fungovať ale určite si to over :D
         $logs = Log::all();
         
         foreach($logs as $log){

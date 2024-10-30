@@ -54,7 +54,7 @@ class Plugin extends PluginBase
     /**
      * registerPermissions used by the backend.
      */
-    public function registerPermissions()
+    public function registerPermissions() // REVIEW - Permissions väčšinou neriešime pomocou OCMS, keď ich je treba, urobia sa custom, takže toto + všetky ostatné funkcie v ktorých tu nič nemáš môžeš odstrániť
     {
         // return []; // Remove this line to activate
 
