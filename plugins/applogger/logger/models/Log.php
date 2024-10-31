@@ -15,10 +15,7 @@ class Log extends Model
      * @var string table name
      */
     public $table = 'applogger_logger_logs';
-
-    // REVIEW - otázka - Prečo si definoval "$fillable"? Nie je to zlá vec, len nikde si nepoužil funkciu "fill()" pre Log model, tak si nie som istý čo ťa doviedlo k tomu aby si to tu definoval, daj vedieť
-    protected $fillable = ['name', 'time_of_arrival', 'is_late'];
-
+    
     /**
      * @var array rules for validation
      */

@@ -1,16 +1,17 @@
 <?php
 
-use AppLogger\Logger\Controllers\Attendance;
+use AppLogger\Logger\Http\Controllers\LoggerController;
 
-// REVIEW - Tip - môžeš si pozrieť ako sa používa v Laravel "group()", budeš tak mať prehladnejšie routes
-Route::get('/world', [Attendance::class, 'helloworld']);
+// Route::get('/world', [LoggerController::class, 'helloworld']);
 
-Route::get('/attendance/logs', [Attendance::class, 'getAllLogs']);
+Route::group(['prefix' => 'attendance'], function (){ 
 
-// REVIEW - Keď vytváraš nové / upravuješ existujúce položky tak sa na definovanie informácií o položke použije skôr POST typ endpointu, a informácie sú v rámci body, nie ako "/{name}"
-Route::get('/attendance/create/{name}', [Attendance::class, 'createAttendance']);
+    Route::get('/logs', [LoggerController::class, 'getAllLogs']);
 
-Route::get('/attendance/logs/{name}', [Attendance::class, 'getStudent']);
+    // // REVIEW - Keď vytváraš nové / upravuješ existujúce položky tak sa na definovanie informácií o položke použije skôr POST typ endpointu, a informácie sú v rámci body, nie ako "/{name}"
+    Route::post('/create/{name}', [LoggerController::class, 'createAttendance']);
 
-// REVIEW - Tu by sa podobne hodil skôr DELETE endpoint typ
-Route::get('/attendance/delete', [Attendance::class, 'deleteLogs']);
+    Route::get('/logs/{name}', [LoggerController::class, 'getStudent']);
+
+    Route::delete('/delete', [LoggerController::class, 'deleteLogs']);
+});
