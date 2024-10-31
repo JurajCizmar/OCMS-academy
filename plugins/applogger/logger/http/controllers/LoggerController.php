@@ -42,8 +42,6 @@ class LoggerController
 
     public function deleteLogs()
     {
-        // Log::query()->delete()
-
         Log::truncate();
 
         return response()->json(['message' => "All logs were deleted successfully"]);
