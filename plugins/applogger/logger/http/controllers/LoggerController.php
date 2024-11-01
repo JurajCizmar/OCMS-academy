@@ -1,16 +1,9 @@
 <?php namespace AppLogger\Logger\Http\Controllers;
 
-use Illuminate\Http\Request;
 use AppLogger\Logger\Models\Log;
-
 
 class LoggerController
 {
-    // public function helloworld()
-    // {
-    //     return "hello World";
-    // }
-
     // My custom routes for AppLogger.Logger
     public function getAllLogs()
     {
@@ -18,12 +11,12 @@ class LoggerController
         return ['data' => $logs];
     }
 
-    public function createAttendance($name)
+    public function createAttendance()
     {
         $log = new Log();
         $hour = date("H");
 
-        $log->name = $name;
+        $log->name = post('name');
         $log->time_of_arrival = date("Y-m-d H:i:s");
         $log->is_late = ($hour >= 8);
         $log->save();
@@ -33,11 +26,14 @@ class LoggerController
 
     public function getStudent($name)
     {
-        // REVIEW - tu funkcia hľadá iba jedného študenta, ale používaš "get()", čo je zoznam. 
-        // Viac by sa hodilo "first()", odporúčam "firstOrFail()"
-        $data = Log::where('name', $name)->firstOrFail();
+        $data = Log::where('name', $name)->get();
 
-        return ['data' => $data];
+        if ($data->isEmpty()){
+            return response()->json(['message' => "No records found"]);
+
+        } else {
+            return ['data' => $data];
+        }
     }
 
     public function deleteLogs()
