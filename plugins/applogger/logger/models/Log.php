@@ -1,6 +1,7 @@
 <?php namespace AppLogger\Logger\Models;
 
 use Model;
+// use AppUser\User\Models\User;
 
 /**
  * Log Model
@@ -15,7 +16,11 @@ class Log extends Model
      * @var string table name
      */
     public $table = 'applogger_logger_logs';
-    
+
+    public $belongsTo = [
+        'user' => \AppUser\User\Models\User::class
+    ];
+
     /**
      * @var array rules for validation
      */

@@ -1,0 +1,4 @@
+if (Hash::check('plain-text', $hashedPassword)) {
+    // The passwords match...
+}
+

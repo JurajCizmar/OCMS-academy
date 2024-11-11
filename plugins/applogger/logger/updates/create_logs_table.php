@@ -3,6 +3,7 @@
 use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
+use AppUser\User\Models\User;
 
 /**
  * CreateLogsTable Migration
@@ -18,10 +19,11 @@ class CreateLogsTable extends Migration
     {
         Schema::create('applogger_logger_logs', function(Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string('name');
             $table->timestamp('time_of_arrival')->nullable();
             $table->boolean('is_late')->default(false);
             $table->timestamps();
+            $table->foreignIdFor(User::class);
         });
     }
 

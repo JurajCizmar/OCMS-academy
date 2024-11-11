@@ -1,0 +1,21 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    title:
+        label: Title
+        type: text
+    author:
+        label: Author
+        type: text
+    published_at:
+        label: Published
+        type: date
+        format: d-m-Y H:i
+    is_premium:
+        label: Premium
+        type: switch
+    # text:
+    #     label: Text
+    #     type: text
