@@ -9,11 +9,12 @@ class LoggerController
     // My custom routes for AppLogger.Logger
     public function getAllLogs(Request $request)
     {
+        // REVIEW - Tu treba využiť ten relation namiesto toho aby si to filtroval pomocou ID, teda obidve spôsoby sú valid ale relation je lepší
         $token = UserService::getTokenFromAuth($request);
         $user_id = UserService::getUserByToken($token)->id;
 
         $logs = Log::where('user_id', $user_id)->get();
-        return ['data' => $logs];
+        return ['data' => $logs]; // REVIEW - Tento kód blokuje zvyšok funkcie, treba to upraviť aby to dávalo zmysel
 
         if ($logs->isEmpty()){
             return response()->json(['message' => "No records found"]);

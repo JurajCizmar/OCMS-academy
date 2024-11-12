@@ -23,7 +23,7 @@ class User extends Model
     protected $hashable = ['password'];
 
     public $hasMany = [
-        'logs' => \AppLogger\Logger\Models\Log::class
+        'logs' => \AppLogger\Logger\Models\Log::class // REVIEW - tu by sa tiež hodilo skôr use AppLogger\Logger\Models\Log;
     ];
 
     /**

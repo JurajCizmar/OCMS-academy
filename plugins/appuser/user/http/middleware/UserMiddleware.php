@@ -20,6 +20,7 @@ class UserMiddleware
         $token = UserService::getTokenFromAuth($request);
 
         if (!$token) {
+            // REVIEW - taktiež, treba hodiť Exception
             return response()->json(['error' => 'Authorization failed'], 401);
 
         } else {

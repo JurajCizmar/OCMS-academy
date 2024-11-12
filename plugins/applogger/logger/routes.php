@@ -2,6 +2,7 @@
 
 use AppLogger\Logger\Http\Controllers\LoggerController;
 
+// REVIEW - Tu platí to isté čo som písal v appuser routes.php
 Route::group([
     'prefix' => 'attendance'
 ], function () {

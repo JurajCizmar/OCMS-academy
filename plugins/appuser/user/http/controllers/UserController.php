@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $username = $request->input('username');
+        $username = $request->input('username'); // REVIEW - stačí input('username') :D
         $password = $request->input('password');
 
         $user = User::where('username', $username)->firstOrFail();
@@ -41,6 +41,7 @@ class UserController extends Controller
             ]);
 
         } else {
+            // REVIEW - V prípadoch kde nastala chyba (napr. kvôli zlým údajom) treba hodiť Exception, ale super, kód 401 je správny pre túto situáciu
             response()->json(['error' => 'Login failed'], 401);
         }
     }
@@ -57,6 +58,7 @@ class UserController extends Controller
             return response()->json(['message' => "You've been logged out"]);
 
         } else {
+            // REVIEW - Toto ako myslíš? Resp. prečo si sa rozhodol pre redirect()?
             return redirect('/');
         }
     }
@@ -71,7 +73,7 @@ class UserController extends Controller
     public function deleteUsers(Request $request)
     {
         $token = UserService::getTokenFromAuth($request);
-        $user = UserService::getUserByToken($token);
+        $user = UserService::getUserByToken($token); // REVIEW - Usera ktorého nájdeš nakoniec nepoužiješ, buď treba zmazať práve tohto jedného namiesto všetkých alebo to tu proste netreba
 
         User::truncate();
         return response()->json(['message' => "Users deleted successfully"]);
