@@ -1,6 +1,7 @@
 <?php namespace AppUser\User\Models;
 
 use Model;
+use AppLogger\Logger\Models\Log;
 
 /**
  * User Model
@@ -23,7 +24,7 @@ class User extends Model
     protected $hashable = ['password'];
 
     public $hasMany = [
-        'logs' => \AppLogger\Logger\Models\Log::class // REVIEW - tu by sa tiež hodilo skôr use AppLogger\Logger\Models\Log;
+        'logs' => Log::class
     ];
 
     /**

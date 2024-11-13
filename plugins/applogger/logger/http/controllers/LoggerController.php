@@ -1,6 +1,7 @@
 <?php namespace AppLogger\Logger\Http\Controllers;
 
 use AppLogger\Logger\Models\Log;
+use AppUser\User\Models\User;
 use Illuminate\Http\Request;
 use AppUser\User\Http\Resources\UserService;
 
@@ -9,12 +10,10 @@ class LoggerController
     // My custom routes for AppLogger.Logger
     public function getAllLogs(Request $request)
     {
-        // REVIEW - Tu treba využiť ten relation namiesto toho aby si to filtroval pomocou ID, teda obidve spôsoby sú valid ale relation je lepší
         $token = UserService::getTokenFromAuth($request);
-        $user_id = UserService::getUserByToken($token)->id;
+        $user = UserService::getUserByToken($token);
 
-        $logs = Log::where('user_id', $user_id)->get();
-        return ['data' => $logs]; // REVIEW - Tento kód blokuje zvyšok funkcie, treba to upraviť aby to dávalo zmysel
+        $logs = $user->logs;
 
         if ($logs->isEmpty()){
             return response()->json(['message' => "No records found"]);

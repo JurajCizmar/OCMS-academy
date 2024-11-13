@@ -1,20 +1,17 @@
 <?php
 
 use AppLogger\Logger\Http\Controllers\LoggerController;
+use AppUser\User\Http\Middleware\UserMiddleware;
 
-// REVIEW - Tu platí to isté čo som písal v appuser routes.php
 Route::group([
-    'prefix' => 'attendance'
+    'prefix' => 'attendance',
+    'middleware' => UserMiddleware::class
 ], function () {
-    Route::get('/logs', [LoggerController::class, 'getAllLogs'])
-        ->middleware('AppUser\User\Http\Middleware\UserMiddleware');
+    Route::get('/logs', [LoggerController::class, 'getAllLogs']);
 
-    Route::post('/create', [LoggerController::class, 'createAttendance'])
-        ->middleware('AppUser\User\Http\Middleware\UserMiddleware');
+    Route::post('/create', [LoggerController::class, 'createAttendance']);
 
-    Route::get('/logs/{name}', [LoggerController::class, 'getStudent'])
-        ->middleware('AppUser\User\Http\Middleware\UserMiddleware');
+    Route::get('/logs/{name}', [LoggerController::class, 'getStudent']);
 
-    Route::delete('/delete', [LoggerController::class, 'deleteLogs'])
-        ->middleware('AppUser\User\Http\Middleware\UserMiddleware');
+    Route::delete('/delete', [LoggerController::class, 'deleteLogs']);
 });

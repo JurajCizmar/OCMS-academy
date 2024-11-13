@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppUser\User\Http\Resources\UserService;
+use October\Rain\Exception\NotFoundException as NotFoundException;
 
 class UserMiddleware
 {
@@ -20,8 +21,8 @@ class UserMiddleware
         $token = UserService::getTokenFromAuth($request);
 
         if (!$token) {
-            // REVIEW - taktiež, treba hodiť Exception
-            return response()->json(['error' => 'Authorization failed'], 401);
+
+            throw new NotFoundException('Authorization failed');
 
         } else {
             $user = UserService::getUserByToken($token);
